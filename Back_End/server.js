@@ -7,15 +7,23 @@ app.use(express.json());
 app.use(cors());
 
 // In-memory storage (resets when server restarts)
-let meals = [
-  { id: randomUUID(), title: "Spaghetti Bolognese", desc: "A classic Italian pasta dish.", count: 0 },
-  { id: randomUUID(), title: "Chicken Curry", desc: "Spicy and flavorful chicken curry.", count: 0 },
-  { id: randomUUID(), title: "Vegetable Stir Fry", desc: "Quick and healthy mixed veggie dish.", count: 0 }
-];
+let meals = [];
 
 // Get all meals
 app.get("/meals", (req, res) => {
   res.json(meals);
+});
+
+// Create a new meal
+app.post("/meals", (req, res) => {
+  const { title, desc } = req.body;
+  if (!title || !desc) {
+    return res.status(400).json({ message: "Title and description are required" });
+  }
+
+  const newMeal = { id: randomUUID(), title, desc, count: 0 };
+  meals.push(newMeal);
+  res.status(201).json(newMeal);
 });
 
 // Increment favorite count by ID
@@ -27,7 +35,7 @@ app.post("/favorite/:id", (req, res) => {
     return res.status(404).json({ message: "Meal not found" });
   }
 
-  meal.count += 1; // ✅ Auto updates count every time
+  meal.count += 1;
   res.json(meal);
 });
 
@@ -46,5 +54,6 @@ app.delete("/meals/:id", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));
+
 
 
