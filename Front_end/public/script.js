@@ -1,4 +1,4 @@
-const API_URL = "https://your-backend.com/api"; // Replace with your real backend
+const API_URL = "https://localhost:5000"; // Replace with your real backend
 
 const form = document.getElementById("ingredient-form");
 const input = document.getElementById("ingredient-input");
