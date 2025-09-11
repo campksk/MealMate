@@ -1,42 +1,37 @@
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
-import dotenv from "dotenv";
 
-dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-// MongoDB connection
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-
-const mealSchema = new mongoose.Schema({
-  title: String,
-  desc: String,
-  count: { type: Number, default: 0 }
-});
-const Meal = mongoose.model("Meal", mealSchema);
+// In-memory storage (resets when server restarts)
+let meals = [
+  { title: "Spaghetti Bolognese", desc: "A classic Italian pasta dish.", count: 0 },
+  { title: "Chicken Curry", desc: "Spicy and flavorful chicken curry.", count: 0 },
+  { title: "Vegetable Stir Fry", desc: "Quick and healthy mixed veggie dish.", count: 0 }
+];
 
 // Get all meals
-app.get("/meals", async (req, res) => {
-  const meals = await Meal.find();
+app.get("/meals", (req, res) => {
   res.json(meals);
 });
 
 // Add or update favorite count
-app.post("/favorite", async (req, res) => {
+app.post("/favorite", (req, res) => {
   const { title, desc } = req.body;
-  let meal = await Meal.findOne({ title });
+  let meal = meals.find(m => m.title === title);
 
   if (meal) {
     meal.count += 1;
   } else {
-    meal = new Meal({ title, desc, count: 1 });
+    meal = { title, desc, count: 1 };
+    meals.push(meal);
   }
-  await meal.save();
+
   res.json(meal);
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));
+
