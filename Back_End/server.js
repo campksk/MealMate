@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import { randomUUID } from "crypto";
 
 const app = express();
 app.use(express.json());
@@ -7,9 +8,9 @@ app.use(cors());
 
 // In-memory storage (resets when server restarts)
 let meals = [
-  { title: "Spaghetti Bolognese", desc: "A classic Italian pasta dish.", count: 0 },
-  { title: "Chicken Curry", desc: "Spicy and flavorful chicken curry.", count: 0 },
-  { title: "Vegetable Stir Fry", desc: "Quick and healthy mixed veggie dish.", count: 0 }
+  { id: randomUUID(), title: "Spaghetti Bolognese", desc: "A classic Italian pasta dish.", count: 0 },
+  { id: randomUUID(), title: "Chicken Curry", desc: "Spicy and flavorful chicken curry.", count: 0 },
+  { id: randomUUID(), title: "Vegetable Stir Fry", desc: "Quick and healthy mixed veggie dish.", count: 0 }
 ];
 
 // Get all meals
@@ -17,21 +18,33 @@ app.get("/meals", (req, res) => {
   res.json(meals);
 });
 
-// Add or update favorite count
-app.post("/favorite", (req, res) => {
-  const { title, desc } = req.body;
-  let meal = meals.find(m => m.title === title);
+// Increment favorite count by ID
+app.post("/favorite/:id", (req, res) => {
+  const { id } = req.params;
+  const meal = meals.find(m => m.id === id);
 
-  if (meal) {
-    meal.count += 1;
-  } else {
-    meal = { title, desc, count: 1 };
-    meals.push(meal);
+  if (!meal) {
+    return res.status(404).json({ message: "Meal not found" });
   }
 
+  meal.count += 1; // ✅ Auto updates count every time
   res.json(meal);
+});
+
+// Delete a meal by ID
+app.delete("/meals/:id", (req, res) => {
+  const { id } = req.params;
+  const index = meals.findIndex(m => m.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ message: "Meal not found" });
+  }
+
+  const deletedMeal = meals.splice(index, 1)[0];
+  res.json({ message: "Meal deleted", meal: deletedMeal });
 });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));
+
 
