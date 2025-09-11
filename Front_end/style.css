@@ -1,15 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&family=Prompt:wght@400;700&display=swap'); /*import font*/
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Prompt', 'Noto Sans Thai', Arial, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0;
   padding: 0;
-  background: #f0f2f5;
+  background: #FEFFD2; /* light orange background */
 }
 
 header {
-  background: #4CAF50;
+  background: #FF7D29; /* dark orange */
   color: white;
   width: 100%;
   text-align: center;
@@ -38,13 +39,14 @@ main {
 #ingredient-form input {
   flex: 1;
   padding: 0.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid #FFBF78; /* medium orange border */
   border-radius: 6px;
+  background: #FFEEA9; /* light orange input */
 }
 
 #ingredient-form button {
   padding: 0.5rem 1rem;
-  background: #4CAF50;
+  background: #FF7D29; /* dark orange button */
   border: none;
   border-radius: 6px;
   color: white;
@@ -54,7 +56,7 @@ main {
 .card {
   width: 100%;
   max-width: 400px;
-  background: white;
+  background: #FFEEA9; /* card background */
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   display: flex;
@@ -80,8 +82,8 @@ main {
   color: white;
 }
 
-.dislike { background: #f44336; }
-.like { background: #4CAF50; }
+.dislike { background: #FFBF78; } /* dark orange for dislike */
+.like { background: #FFBF78; color: #000; } /* medium orange for like, black text */
 
 #favorites {
   margin-top: 2rem;
@@ -94,7 +96,7 @@ main {
 #favorite-list { list-style: none; padding: 0; }
 
 #favorite-list li {
-  background: white;
+  background: #FFEEA9; /* light orange list item */
   margin: 0.3rem 0;
   padding: 0.5rem;
   border-radius: 6px;
@@ -111,11 +113,11 @@ main {
   cursor: pointer;
   font-size: 0.8rem;
   color: white;
-  background: #2196F3;
+  background: #FFBF78; /* medium orange toggle button */
 }
 
 .favorite-count {
   margin-left: 0.5rem;
-  color: #ff9800;
+  color: #FF7D29; /* dark orange */
   font-weight: bold;
 }
