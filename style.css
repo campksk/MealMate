@@ -1,0 +1,121 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  background: #f0f2f5;
+}
+
+header {
+  background: #4CAF50;
+  color: white;
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  padding: 1rem;
+}
+
+#ingredient-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+#ingredient-form input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+#ingredient-form button {
+  padding: 0.5rem 1rem;
+  background: #4CAF50;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+
+.buttons button {
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: white;
+}
+
+.dislike { background: #f44336; }
+.like { background: #4CAF50; }
+
+#favorites {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+#favorites h2 { margin-bottom: 0.5rem; }
+
+#favorite-list { list-style: none; padding: 0; }
+
+#favorite-list li {
+  background: white;
+  margin: 0.3rem 0;
+  padding: 0.5rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.details { display: none; margin-top: 0.5rem; font-size: 0.9rem; color: #555; }
+
+.toggle-btn {
+  margin: 0.2rem;
+  padding: 0.3rem 0.6rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: white;
+  background: #2196F3;
+}
+
+.favorite-count {
+  margin-left: 0.5rem;
+  color: #ff9800;
+  font-weight: bold;
+}
