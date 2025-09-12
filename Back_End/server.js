@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import { randomUUID } from "crypto";
 
 import * as frontEndHandler from "../Back_End/handler/frontend.js"
 import * as requestAIHandler from "../Back_End/handler/chat.js"

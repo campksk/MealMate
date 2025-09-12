@@ -1,3 +1,5 @@
+import { randomUUID } from "crypto";
+
 let meals = [];
 
 export const getMeals = async (req, res) => {
