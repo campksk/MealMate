@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 
-import * as frontEndHandler from "../Back_End/handler/frontend.js"
-import * as requestAIHandler from "../Back_End/handler/chat.js"
+import * as frontEndHandler from "./handler/frontend.js"
+import * as requestAIHandler from "./handler/chat.js"
 
 const app = express();
 app.use(express.json());
