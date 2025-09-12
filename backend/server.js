@@ -22,8 +22,8 @@ app.delete("/meals/:id", frontEndHandler.deleteMeal);
 app.post("/generate", requestAIHandler.requestAI)
 
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));
+const PORT = 3221;
+app.listen(PORT, () => console.log(`✅ Server backend running on http://localhost:${PORT}`));
 
 
 
