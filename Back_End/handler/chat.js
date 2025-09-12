@@ -16,7 +16,6 @@ Request format
 export const requestAI = async (req, res) => {
     //const {ingredient, cookMethod, foodRole, nationality} = req.body;
   const {ingredients, cookMethod = "ใดก็ได้", foodRole = "", nationality = "ไหนก็ได้"} = req.body;
-  console.log(ingredients);
   if (!ingredients) {
     return res.status(400).json({ error: "missing message" });
   }
