@@ -15,18 +15,19 @@ Request format
 
 export const requestAI = async (req, res) => {
     //const {ingredient, cookMethod, foodRole, nationality} = req.body;
-  const {ingredient, cookMethod = "ใดก็ได้", foodRole = "", nationality = "ไหนก็ได้"} = req.body;
-  if (!ingredient) {
+  const {ingredients, cookMethod = "ใดก็ได้", foodRole = "", nationality = "ไหนก็ได้"} = req.body;
+  console.log(ingredients);
+  if (!ingredients) {
     return res.status(400).json({ error: "missing message" });
   }
 
   var formatPrompt = `สร้างเมนู${foodRole}ที่ปรุงด้วยวิธี${cookMethod}และเป็นอาหารชาติ${nationality}`
   formatPrompt += "มา 10 เมนู โดยวัตถุดิบหลักต้องใช้วัตถุดิบต่อไปนี้เท่านั้น"
-  ingredient.forEach((e, id) => {
+  ingredients.forEach((e, id) => {
     formatPrompt += `${id+1}. ${e}\n`
   });
   formatPrompt += "\n ขอ response เป็นรูปแบบ json array ของเมนูแต่ละเมนู ภาษาของเนื้อความเป็นภาษาไทย ไม่ต้องมีข้อความอื่นเพิ่มเติม ไม่ต้องมี code snippet closure (```ปิดหัวท้าย)"
-  formatPrompt += `\n ตัวอย่างรูปแบบของเมนู {"name":"ชื่อเมนู", "desc":"รายละเอียดเมนู", "ingredientUsed":["วัตถุดิบที่ 1", "วัตถุดิบที่ 2", "วัตถุดิบที่ 3", ...]}`
+  formatPrompt += `\n ตัวอย่างรูปแบบของเมนู {"name":"ชื่อเมนู", "desc":"รายละเอียดเมนู", "ingredientsUsed":["วัตถุดิบที่ 1", "วัตถุดิบที่ 2", "วัตถุดิบที่ 3", ...]}`
 
   const ai = "openrouter";
   const userIP = req.ip;
