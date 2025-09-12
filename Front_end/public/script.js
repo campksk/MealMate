@@ -1,4 +1,4 @@
-const API_URL = "https://localhost:5000"; // Replace with your real backend
+const API_URL = "http://localhost:3221"; // Replace with your real backend
 
 const form = document.getElementById("ingredient-form");
 const input = document.getElementById("ingredient-input");
@@ -16,7 +16,7 @@ let favorites = [];
 // Load initial global favorites from backend
 async function loadFavorites() {
   try {
-    const res = await fetch(`${API_URL}/favorites`);
+    const res = await fetch(`${API_URL}/meals`);
     favorites = await res.json();
     renderFavorites();
   } catch (err) {
@@ -45,7 +45,7 @@ function showNextMeal() {
 // Fetch meal suggestions from backend
 async function fetchMealsFromAPI(ingredients) {
   try {
-    const res = await fetch(`${API_URL}/meals`, {
+    const res = await fetch(`${API_URL}/generate`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ingredients })
