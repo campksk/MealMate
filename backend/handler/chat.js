@@ -12,6 +12,7 @@ Request format
 }
 
 */
+let lastSent = [];
 
 export const requestAI = async (req, res) => {
     //const {ingredient, cookMethod, foodRole, nationality} = req.body;
