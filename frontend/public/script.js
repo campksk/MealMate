@@ -65,10 +65,10 @@ async function fetchMealsFromAPI(ingredients, filters = {}) {
 // Favorite a meal globally
 async function favoriteMeal(meal) {
   try {
-    const res = await fetch(`${API_URL}/favorite`, {
+    const res = await fetch(`${API_URL}/meals`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title: meal.title })
+      body: JSON.stringify({ name: meal.name,  desc: meal.desc})
     });
     return await res.json(); // returns updated meal with global count
   } catch (err) {
@@ -83,7 +83,7 @@ function renderFavorites() {
   favorites.forEach((meal) => {
     const li = document.createElement("li");
     li.innerHTML = `
-      <strong class="meal-title">${meal.title}</strong> 
+      <strong class="meal-title">${meal.name}</strong> 
       <span class="favorite-count">⭐ ${meal.count || 0}</span>
       <button class="toggle-btn">Show Details</button>
       <p class="details">${meal.desc}</p>
@@ -140,9 +140,10 @@ dislikeBtn.addEventListener("click", () => showNextMeal());
 // Like button
 likeBtn.addEventListener("click", async () => {
   if (currentMeal) {
+    console.log(currentMeal);
     const updatedMeal = await favoriteMeal(currentMeal);
 
-    const existing = favorites.find(m => m.title === updatedMeal.title);
+    const existing = favorites.find(m => m.name === updatedMeal.name);
     if (existing) {
       existing.count = updatedMeal.count;
     } else {
