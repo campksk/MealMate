@@ -6,22 +6,22 @@ dotenv.config()
 Request format
 {
     "ingredient":["ส้ม", "ชมพู่", "มะละกอ"], 
-    "cookMethod":"", 
-    "foodRole":"ของหวาน", 
-    "nationality":"" 
+    "style":"", 
+    "role":"ของหวาน", 
+    "cuisine":"" 
 }
 
 */
 let lastSent = [];
 
 export const requestAI = async (req, res) => {
-    //const {ingredient, cookMethod, foodRole, nationality} = req.body;
-  const {ingredients, cookMethod = "ใดก็ได้", foodRole = "", nationality = "ไหนก็ได้"} = req.body;
+    //const {ingredient, style, role, cuisine} = req.body;
+  const {ingredients, style = "ใดก็ได้", role = "", cuisine = "ไหนก็ได้"} = req.body;
   if (!ingredients) {
     return res.status(400).json({ error: "missing message" });
   }
 
-  var formatPrompt = `สร้างเมนู${foodRole}ที่ปรุงด้วยวิธี${cookMethod}และเป็นอาหารชาติ${nationality}`
+  var formatPrompt = `สร้างเมนู${role}ที่ปรุงด้วยวิธี${style}และเป็นอาหารชาติ${cuisine}`
   formatPrompt += "มา 10 เมนู โดยวัตถุดิบหลักต้องใช้วัตถุดิบต่อไปนี้เท่านั้น"
   ingredients.forEach((e, id) => {
     formatPrompt += `${id+1}. ${e}\n`
