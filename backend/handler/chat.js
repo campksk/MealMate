@@ -23,7 +23,7 @@ export const requestAI = async (req, res) => {
   }
 
   var formatPrompt = `สร้างเมนู${role}ที่ปรุงด้วยวิธี${style}และเป็นอาหารชาติ${cuisine}`
-  formatPrompt += "มา 10 เมนู โดยวัตถุดิบหลักต้องใช้วัตถุดิบต่อไปนี้เท่านั้น"
+  formatPrompt += "มา 5 เมนู โดยวัตถุดิบหลักต้องใช้วัตถุดิบต่อไปนี้เท่านั้น"
   ingredients.forEach((e, id) => {
     formatPrompt += `${id+1}. ${e}\n`
   });
