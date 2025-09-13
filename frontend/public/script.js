@@ -39,7 +39,7 @@ function showNextMeal() {
     return;
   }
   currentMeal = meals.shift();
-  mealTitle.textContent = currentMeal.title;
+  mealTitle.textContent = currentMeal.name;
   mealDesc.textContent = currentMeal.desc;
   mealDesc.style.display = "none";
   toggleDetailsBtn.textContent = "Show Details";
