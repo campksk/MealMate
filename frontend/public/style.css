@@ -70,7 +70,7 @@ main {
 .buttons {
   display: flex;
   justify-content: space-between;
-  width: 200px;
+  width: 425px;
 }
 
 .buttons button {
