@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import { GoogleGenAI } from "@google/genai"
+import { json } from "express";
 dotenv.config()
 
 /*
@@ -26,8 +27,8 @@ export const requestAI = async (req, res) => {
   ingredients.forEach((e, id) => {
     formatPrompt += `${id+1}. ${e}\n`
   });
-  formatPrompt += "\n ขอ response เป็นรูปแบบ json array ของเมนูแต่ละเมนู ภาษาของเนื้อความเป็นภาษาไทย ไม่ต้องมีข้อความอื่นเพิ่มเติม ไม่ต้องมี code snippet closure (```ปิดหัวท้าย)"
-  formatPrompt += `\n ตัวอย่างรูปแบบของเมนู { "name":"ชื่อเมนู", "desc":"รายละเอียดเมนู", "ingredientsUsed": ["วัตถุดิบที่ 1", "วัตถุดิบที่ 2", "วัตถุดิบที่ 3", ...]}`
+  formatPrompt += "\n strictly follow these rule: 1. response should be the JSON array of menus 2. respond in Thai language  3. no other suggestion or code closure (```). just JSON objects text"
+  formatPrompt += `\n 4. Example of a menu json structure { "name":"ชื่อเมนู", "desc":"รายละเอียดเมนู", "ingredientsUsed": ["วัตถุดิบที่ 1", "วัตถุดิบที่ 2", "วัตถุดิบที่ 3", ...]}`
 
   const ai = "google";
   const userIP = req.ip;
@@ -73,12 +74,7 @@ export const requestAI = async (req, res) => {
       content = response.text;
     }
 
-    const reply = `${content} เวลา ${new Date().toLocaleTimeString()}`;
-
-    // optional latency simulation
-    await new Promise((r) => setTimeout(r, 500));
-
-    return res.json({ reply });
+    return res.json(JSON.parse(content));
 
   } catch (err) {
     console.error(err);
