@@ -1,16 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&family=Prompt:wght@400;700&display=swap'); /*import font*/
 body {
-  font-family: 'Prompt', 'Noto Sans Thai', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0;
   padding: 0;
-  background: #FEFFD2; /* light orange background */
+  background: #f0f2f5;
 }
 
 header {
-  background: #FF7D29; /* dark orange */
+  background: #4CAF50;
   color: white;
   width: 100%;
   text-align: center;
@@ -39,42 +38,23 @@ main {
 #ingredient-form input {
   flex: 1;
   padding: 0.5rem;
-  border: 1px solid #FFBF78; /* medium orange border */
+  border: 1px solid #ccc;
   border-radius: 6px;
-  background: #FFEEA9; /* light orange input */
 }
 
 #ingredient-form button {
   padding: 0.5rem 1rem;
-  background: #FF7D29; /* dark orange button */
+  background: #4CAF50;
   border: none;
   border-radius: 6px;
   color: white;
   cursor: pointer;
 }
-/* Filters styling */
-#ingredient-form select {
-  padding: 0.5rem;
-  border: 1px solid #FFBF78;
-  border-radius: 6px;
-  background: #FFEEA9;
-  font-family: inherit;
-  font-size: 0.9rem;
-  flex: 1;
-  min-width: 120px;
-}
-
-/* Hover feedback for buttons */
-#ingredient-form button:hover,
-.toggle-btn:hover {
-  background: #ff9f4d;
-}
-
 
 .card {
   width: 100%;
   max-width: 400px;
-  background: #FFEEA9; /* card background */
+  background: white;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   display: flex;
@@ -88,7 +68,7 @@ main {
 .buttons {
   display: flex;
   justify-content: space-between;
-  width: 425px;
+  width: 200px;
 }
 
 .buttons button {
@@ -100,8 +80,8 @@ main {
   color: white;
 }
 
-.dislike { background: #FFBF78; } /* dark orange for dislike */
-.like { background: #FFBF78; color: #000; } /* medium orange for like, black text */
+.dislike { background: #f44336; }
+.like { background: #4CAF50; }
 
 #favorites {
   margin-top: 2rem;
@@ -114,7 +94,7 @@ main {
 #favorite-list { list-style: none; padding: 0; }
 
 #favorite-list li {
-  background: #FFEEA9; /* light orange list item */
+  background: white;
   margin: 0.3rem 0;
   padding: 0.5rem;
   border-radius: 6px;
@@ -131,11 +111,11 @@ main {
   cursor: pointer;
   font-size: 0.8rem;
   color: white;
-  background: #FFBF78; /* medium orange toggle button */
+  background: #2196F3;
 }
 
 .favorite-count {
   margin-left: 0.5rem;
-  color: #FF7D29; /* dark orange */
+  color: #ff9800;
   font-weight: bold;
 }

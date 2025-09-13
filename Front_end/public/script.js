@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3221"; // Replace with your real backend
+const API_URL = "https://your-backend.com/api"; // Replace with your real backend
 
 const form = document.getElementById("ingredient-form");
 const input = document.getElementById("ingredient-input");
@@ -13,14 +13,10 @@ let meals = [];
 let currentMeal = null;
 let favorites = [];
 
-const filterRole = document.getElementById("filter-role");
-const filterStyle = document.getElementById("filter-style");
-const filterCuisine = document.getElementById("filter-cuisine");
-
 // Load initial global favorites from backend
 async function loadFavorites() {
   try {
-    const res = await fetch(`${API_URL}/meals`);
+    const res = await fetch(`${API_URL}/favorites`);
     favorites = await res.json();
     renderFavorites();
   } catch (err) {
@@ -47,12 +43,12 @@ function showNextMeal() {
 }
 
 // Fetch meal suggestions from backend
-async function fetchMealsFromAPI(ingredients, filters = {}) {
+async function fetchMealsFromAPI(ingredients) {
   try {
-    const res = await fetch(`${API_URL}/generate`, {
+    const res = await fetch(`${API_URL}/meals`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ingredients, ...filters })
+      body: JSON.stringify({ ingredients })
     });
     return await res.json();
   } catch (err) {
@@ -60,7 +56,6 @@ async function fetchMealsFromAPI(ingredients, filters = {}) {
     return [];
   }
 }
-
 
 // Favorite a meal globally
 async function favoriteMeal(meal) {
@@ -110,15 +105,9 @@ function renderFavorites() {
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const ingredients = input.value.trim();
+  if (!ingredients) return;
 
-  const filters = {
-    role: filterRole.value,
-    style: filterStyle.value,
-    cuisine: filterCuisine.value
-  };
-
-  meals = await fetchMealsFromAPI(ingredients, filters);
-
+  meals = await fetchMealsFromAPI(ingredients);
   input.value = "";
   showNextMeal();
 });

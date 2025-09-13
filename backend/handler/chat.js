@@ -6,29 +6,30 @@ dotenv.config()
 Request format
 {
     "ingredient":["ส้ม", "ชมพู่", "มะละกอ"], 
-    "cookMethod":"", 
-    "foodRole":"ของหวาน", 
-    "nationality":"" 
+    "style":"", 
+    "role":"ของหวาน", 
+    "cuisine":"" 
 }
 
 */
+let lastSent = [];
 
 export const requestAI = async (req, res) => {
-    //const {ingredient, cookMethod, foodRole, nationality} = req.body;
-  const {ingredients, cookMethod = "ใดก็ได้", foodRole = "", nationality = "ไหนก็ได้"} = req.body;
+    //const {ingredient, style, role, cuisine} = req.body;
+  const {ingredients, style = "ใดก็ได้", role = "", cuisine = "ไหนก็ได้"} = req.body;
   if (!ingredients) {
     return res.status(400).json({ error: "missing message" });
   }
 
-  var formatPrompt = `สร้างเมนู${foodRole}ที่ปรุงด้วยวิธี${cookMethod}และเป็นอาหารชาติ${nationality}`
+  var formatPrompt = `สร้างเมนู${role}ที่ปรุงด้วยวิธี${style}และเป็นอาหารชาติ${cuisine}`
   formatPrompt += "มา 10 เมนู โดยวัตถุดิบหลักต้องใช้วัตถุดิบต่อไปนี้เท่านั้น"
   ingredients.forEach((e, id) => {
     formatPrompt += `${id+1}. ${e}\n`
   });
   formatPrompt += "\n ขอ response เป็นรูปแบบ json array ของเมนูแต่ละเมนู ภาษาของเนื้อความเป็นภาษาไทย ไม่ต้องมีข้อความอื่นเพิ่มเติม ไม่ต้องมี code snippet closure (```ปิดหัวท้าย)"
-  formatPrompt += `\n ตัวอย่างรูปแบบของเมนู {"name":"ชื่อเมนู", "desc":"รายละเอียดเมนู", "ingredientsUsed":["วัตถุดิบที่ 1", "วัตถุดิบที่ 2", "วัตถุดิบที่ 3", ...]}`
+  formatPrompt += `\n ตัวอย่างรูปแบบของเมนู { "name":"ชื่อเมนู", "desc":"รายละเอียดเมนู", "ingredientsUsed": ["วัตถุดิบที่ 1", "วัตถุดิบที่ 2", "วัตถุดิบที่ 3", ...]}`
 
-  const ai = "openrouter";
+  const ai = "google";
   const userIP = req.ip;
   const now = Date.now();
 

@@ -10,11 +10,42 @@
   <header>🍽️ Mealmate</header>
 
   <main>
-    <!-- Ingredient input -->
-    <form id="ingredient-form">
-      <input type="text" id="ingredient-input" placeholder="Enter ingredient(s)..." required>
-      <button type="submit">Go</button>
-    </form>
+  <form id="ingredient-form">
+  <input id="ingredient-input" placeholder="Enter ingredients..." />
+
+  <select id="filter-role">
+    <option value="">Role: All</option>
+    <option>Appetizer</option>
+    <option>Main Course</option>
+    <option>Side Dish</option>
+    <option>Dessert</option>
+    <option>Beverage</option>
+  </select>
+
+  <select id="filter-style">
+    <option value="">Cooking Style: All</option>
+    <option>Boiled/Soup</option>
+    <option>Stir-fried</option>
+    <option>Fried</option>
+    <option>Grilled/Roasted</option>
+    <option>Steamed/Stewed</option>
+  </select>
+
+  <select id="filter-cuisine">
+    <option value="">Cuisine: All</option>
+    <option>Thai</option>
+    <option>Chinese</option>
+    <option>Japanese</option>
+    <option>Italian</option>
+    <option>Indian</option>
+    <option>Mexican</option>
+    <option>American</option>
+    <option>European</option>
+  </select>
+
+  <button type="submit">Search</button>
+</form>
+
 
     <!-- Meal suggestion card -->
     <div id="meal-card" class="card">
