@@ -27,9 +27,9 @@ export const requestAI = async (req, res) => {
     formatPrompt += `${id+1}. ${e}\n`
   });
   formatPrompt += "\n ขอ response เป็นรูปแบบ json array ของเมนูแต่ละเมนู ภาษาของเนื้อความเป็นภาษาไทย ไม่ต้องมีข้อความอื่นเพิ่มเติม ไม่ต้องมี code snippet closure (```ปิดหัวท้าย)"
-  formatPrompt += `\n ตัวอย่างรูปแบบของเมนู {"name":"ชื่อเมนู", "desc":"รายละเอียดเมนู", "ingredientsUsed":["วัตถุดิบที่ 1", "วัตถุดิบที่ 2", "วัตถุดิบที่ 3", ...]}`
+  formatPrompt += `\n ตัวอย่างรูปแบบของเมนู { "name":"ชื่อเมนู", "desc":"รายละเอียดเมนู", "ingredientsUsed": ["วัตถุดิบที่ 1", "วัตถุดิบที่ 2", "วัตถุดิบที่ 3", ...]}`
 
-  const ai = "openrouter";
+  const ai = "google";
   const userIP = req.ip;
   const now = Date.now();
 
