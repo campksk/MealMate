@@ -139,3 +139,13 @@ main {
   color: #FF7D29; /* dark orange */
   font-weight: bold;
 }
+
+.delete-text {
+  color: gray;
+  cursor: pointer;
+}
+
+.delete-text:hover {
+  color: red;
+  text-decoration: underline;
+}
