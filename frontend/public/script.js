@@ -1,3 +1,4 @@
+// js
 const API_URL = "http://mealmate.ddns.net:3221"; // Replace with your real backend
 
 const form = document.getElementById("ingredient-form");
@@ -8,6 +9,7 @@ const toggleDetailsBtn = document.getElementById("toggle-details");
 const dislikeBtn = document.getElementById("dislike-btn");
 const likeBtn = document.getElementById("like-btn");
 const favoriteList = document.getElementById("favorite-list");
+const statusBox = document.getElementById("status"); // 🔹 div สำหรับโหลด/error
 
 let meals = [];
 let currentMeal = null;
@@ -61,14 +63,13 @@ async function fetchMealsFromAPI(ingredients, filters = {}) {
   }
 }
 
-
 // Favorite a meal globally
 async function favoriteMeal(meal) {
   try {
     const res = await fetch(`${API_URL}/meals`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: meal.name,  desc: meal.desc})
+      body: JSON.stringify({ name: meal.name, desc: meal.desc })
     });
     return await res.json(); // returns updated meal with global count
   } catch (err) {
@@ -135,10 +136,7 @@ function renderFavorites() {
 
         if (!res.ok) throw new Error("Failed to favorite meal");
 
-        // เพิ่ม count ใน local state
         meal.count = (meal.count || 0) + 1;
-
-        // render ใหม่
         renderFavorites();
       } catch (err) {
         console.error(err);
@@ -161,11 +159,22 @@ form.addEventListener("submit", async (e) => {
     cuisine: filterCuisine.value
   };
 
+  // 🔹 Show overlay
+  document.getElementById("loading-overlay").classList.add("active");
+
+  meals = [];
+  showNextMeal();
+
+  // fetch
   meals = await fetchMealsFromAPI(ingredients, filters);
+
+  // 🔹 Hide overlay
+  document.getElementById("loading-overlay").classList.remove("active");
 
   input.value = "";
   showNextMeal();
 });
+
 
 // Toggle meal details
 toggleDetailsBtn.addEventListener("click", () => {

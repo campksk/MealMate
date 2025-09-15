@@ -1,3 +1,4 @@
+<!-- html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,47 +8,48 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>🍽️ Mealmate</header>
+  <header>MealMate 🍽️</header>
 
   <main>
-  <form id="ingredient-form">
-  <input id="ingredient-input" placeholder="Enter ingredients..." />
-  <button type="submit">Search</button>
+    <form id="ingredient-form">
+      <input id="ingredient-input" placeholder="Enter ingredients..." />
+      <button type="submit">Search</button>
 
-  <div class="filter-group">
-    <select id="filter-role">
-      <option value="">Role: All</option>
-      <option>Appetizer</option>
-      <option>Main Course</option>
-      <option>Side Dish</option>
-      <option>Dessert</option>
-      <option>Beverage</option>
-    </select>
+      <div class="filter-group">
+        <select id="filter-role">
+          <option value="">Role: All</option>
+          <option>Appetizer</option>
+          <option>Main Course</option>
+          <option>Side Dish</option>
+          <option>Dessert</option>
+          <option>Beverage</option>
+        </select>
 
-    <select id="filter-style">
-      <option value="">Cooking Style: All</option>
-      <option>Boiled/Soup</option>
-      <option>Stir-fried</option>
-      <option>Fried</option>
-      <option>Grilled/Roasted</option>
-      <option>Steamed/Stewed</option>
-    </select>
+        <select id="filter-style">
+          <option value="">Cooking Style: All</option>
+          <option>Boiled/Soup</option>
+          <option>Stir-fried</option>
+          <option>Fried</option>
+          <option>Grilled/Roasted</option>
+          <option>Steamed/Stewed</option>
+        </select>
 
-    <select id="filter-cuisine">
-      <option value="">Cuisine: All</option>
-      <option>Thai</option>
-      <option>Chinese</option>
-      <option>Japanese</option>
-      <option>Italian</option>
-      <option>Indian</option>
-      <option>Mexican</option>
-      <option>American</option>
-      <option>European</option>
-    </select>
-  </div>
-</form>
+        <select id="filter-cuisine">
+          <option value="">Cuisine: All</option>
+          <option>Thai</option>
+          <option>Chinese</option>
+          <option>Japanese</option>
+          <option>Italian</option>
+          <option>Indian</option>
+          <option>Mexican</option>
+          <option>American</option>
+          <option>European</option>
+        </select>
+      </div>
+    </form>
 
-
+    <!-- 🔹 จุดแสดง Loading/Error -->
+    <div id="status"></div>
 
     <!-- Meal suggestion card -->
     <div id="meal-card" class="card">
@@ -70,5 +72,9 @@
   </main>
 
   <script src="script.js"></script>
+  <!-- 🔹 Loading Overlay -->
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+  </div>
 </body>
 </html>

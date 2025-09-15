@@ -1,3 +1,4 @@
+/* css */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&family=Prompt:wght@400;700&display=swap'); /*import font*/
 body {
   font-family: 'Prompt', 'Noto Sans Thai', Arial, sans-serif;
@@ -178,7 +179,7 @@ main {
   #ingredient-form input {
     order: 1;
     flex: 3;               /* input กินพื้นที่มาก */
-    min-width: 0;          /* ป้องกันดัน layout */
+    min-width: 200;          /* ป้องกันดัน layout */
   }
 
   #ingredient-form button {
@@ -204,6 +205,12 @@ main {
 
 /* คอมพิวเตอร์ (หน้าจอใหญ่) */
 @media (min-width: 601px) {
+  main{
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 0 1rem;
+  }
   #ingredient-form {
     display: flex;
     flex-direction: row;   /* เรียงเป็นแถว */
@@ -222,11 +229,74 @@ main {
     flex-direction: row;
     gap: 0.5rem;
     flex: 3;
+    min-width: 425px;
+    max-width: 425px;
   }
 
   #ingredient-form button {
     order: 3;  /* อันดับที่ 3 */
     flex: 1;
   }
+}
+/* 🔹 Spinner + Error */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #ddd;
+  border-top: 3px solid #FF7D29;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+.error {
+  color: red;
+  margin-top: 1rem;
+}
+
+/* 🔹 Fullscreen Loading Overlay */
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(128, 128, 128, 0.4); /* สีเทาโปร่ง */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  visibility: hidden;  /* ซ่อนไว้ก่อน */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#loading-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Spinner ใหญ่ขึ้น */
+#loading-overlay .spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #ddd;
+  border-top: 6px solid #FF7D29;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
 }
 
