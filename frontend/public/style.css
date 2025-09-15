@@ -34,10 +34,18 @@ main {
   gap: 0.5rem;
   margin-bottom: 1.5rem;
   width: 100%;
+  flex-wrap: wrap; /* เพิ่มอันนี้ */
+  align-items: center;
+}
+
+.filter-group {
+  display: flex;
+  gap: 0.5rem;
+  flex: 3;
 }
 
 #ingredient-form input {
-  flex: 1;
+  flex: 2;
   padding: 0.5rem;
   border: 1px solid #FFBF78; /* medium orange border */
   border-radius: 6px;
@@ -88,7 +96,7 @@ main {
 .buttons {
   display: flex;
   justify-content: space-between;
-  width: 425px;
+  width: 400px;
 }
 
 .buttons button {
@@ -138,4 +146,76 @@ main {
   margin-left: 0.5rem;
   color: #FF7D29; /* dark orange */
   font-weight: bold;
+}
+
+/* Responsive layout for small screens */
+@media (max-width: 600px) {
+  main {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 1rem;       /* เว้นระยะซ้ายขวาเหมือนเดิม */
+    box-sizing: border-box;
+  }
+
+  #ingredient-form {
+    display: flex;
+    flex-wrap: wrap;       /* อนุญาตให้ตัดบรรทัด */
+    gap: 0.5rem;
+    margin-top: 0.5rem;   /* เว้นขอบด้านบนเพิ่ม */
+  }
+
+  /* บรรทัดแรก: input + search */
+  #ingredient-form input {
+    order: 1;
+    flex: 3;               /* input กินพื้นที่มาก */
+    min-width: 0;          /* ป้องกันดัน layout */
+  }
+
+  #ingredient-form button {
+    order: 2;
+    flex: 1;               /* search ปุ่มเล็กกว่า */
+    min-width: 80px;
+  }
+
+  /* บรรทัดสอง: role, cooking style, cuisine */
+  .filter-group {
+    order: 3;
+    display: flex;
+    flex-direction: row;   /* ให้อยู่บรรทัดเดียวกัน */
+    gap: 0.5rem;
+    width: 100%;           /* กินเต็มบรรทัด */
+  }
+
+  .filter-group select {
+    flex: 1;
+  }
+}
+
+
+/* คอมพิวเตอร์ (หน้าจอใหญ่) */
+@media (min-width: 601px) {
+  #ingredient-form {
+    display: flex;
+    flex-direction: row;   /* เรียงเป็นแถว */
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  #ingredient-form input {
+    order: 1;  /* อันดับที่ 1 */
+    flex: 2;
+  }
+
+  .filter-group {
+    order: 2;  /* อันดับที่ 2 */
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    flex: 3;
+  }
+
+  #ingredient-form button {
+    order: 3;  /* อันดับที่ 3 */
+    flex: 1;
+  }
 }
