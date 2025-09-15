@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3221"; // Replace with your real backend
+const API_URL = "http://mealmate.ddns.net:3221"; // Replace with your real backend
 
 const form = document.getElementById("ingredient-form");
 const input = document.getElementById("ingredient-input");
@@ -39,7 +39,7 @@ function showNextMeal() {
     return;
   }
   currentMeal = meals.shift();
-  mealTitle.textContent = currentMeal.title;
+  mealTitle.textContent = currentMeal.name;
   mealDesc.textContent = currentMeal.desc;
   mealDesc.style.display = "none";
   toggleDetailsBtn.textContent = "Show Details";
@@ -65,10 +65,10 @@ async function fetchMealsFromAPI(ingredients, filters = {}) {
 // Favorite a meal globally
 async function favoriteMeal(meal) {
   try {
-    const res = await fetch(`${API_URL}/favorite`, {
+    const res = await fetch(`${API_URL}/meals`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title: meal.title })
+      body: JSON.stringify({ name: meal.name,  desc: meal.desc})
     });
     return await res.json(); // returns updated meal with global count
   } catch (err) {
@@ -83,15 +83,20 @@ function renderFavorites() {
   favorites.forEach((meal) => {
     const li = document.createElement("li");
     li.innerHTML = `
-      <strong class="meal-title">${meal.title}</strong> 
-      <span class="favorite-count">⭐ ${meal.count || 0}</span>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong class="meal-title">${meal.name}</strong>
+        <span class="actions" style="display:flex; gap:12px; align-items:center;">
+          <span class="favorite-count" style="cursor:pointer;">⭐ ${meal.count || 0}</span>
+          <span class="delete-text">Delete</span>
+        </span>
+      </div>
       <button class="toggle-btn">Show Details</button>
-      <p class="details">${meal.desc}</p>
+      <p class="details" style="display:none">${meal.desc}</p>
     `;
 
+    // toggle details
     const toggleBtn = li.querySelector(".toggle-btn");
     const details = li.querySelector(".details");
-
     toggleBtn.addEventListener("click", () => {
       if (details.style.display === "none") {
         details.style.display = "block";
@@ -99,6 +104,45 @@ function renderFavorites() {
       } else {
         details.style.display = "none";
         toggleBtn.textContent = "Show Details";
+      }
+    });
+
+    // delete meal
+    const deleteText = li.querySelector(".delete-text");
+    deleteText.addEventListener("click", async () => {
+      try {
+        const res = await fetch(`${API_URL}/meals/${meal.id}`, {
+          method: "DELETE",
+        });
+
+        if (!res.ok) throw new Error("Failed to delete meal");
+
+        favorites = favorites.filter((m) => m.id !== meal.id);
+        renderFavorites();
+      } catch (err) {
+        console.error(err);
+        alert("Error deleting meal");
+      }
+    });
+
+    // favorite (กดดาว)
+    const favoriteCount = li.querySelector(".favorite-count");
+    favoriteCount.addEventListener("click", async () => {
+      try {
+        const res = await fetch(`${API_URL}/favorite/${meal.id}`, {
+          method: "POST",
+        });
+
+        if (!res.ok) throw new Error("Failed to favorite meal");
+
+        // เพิ่ม count ใน local state
+        meal.count = (meal.count || 0) + 1;
+
+        // render ใหม่
+        renderFavorites();
+      } catch (err) {
+        console.error(err);
+        alert("Error favoriting meal");
       }
     });
 
@@ -140,9 +184,10 @@ dislikeBtn.addEventListener("click", () => showNextMeal());
 // Like button
 likeBtn.addEventListener("click", async () => {
   if (currentMeal) {
+    console.log(currentMeal);
     const updatedMeal = await favoriteMeal(currentMeal);
 
-    const existing = favorites.find(m => m.title === updatedMeal.title);
+    const existing = favorites.find(m => m.name === updatedMeal.name);
     if (existing) {
       existing.count = updatedMeal.count;
     } else {

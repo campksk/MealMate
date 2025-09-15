@@ -7,12 +7,12 @@ export const getMeals = async (req, res) => {
 }
 
 export const addMeals = async (req, res) => {
-    const { title, desc } = req.body;
-    if (!title || !desc) {
-        return res.status(400).json({ message: "Title and description are required" });
+    const { name, desc } = req.body;
+    if (!name || !desc) {
+        return res.status(400).json({ message: "Name and description are required" });
     }
 
-    const newMeal = { id: randomUUID(), title, desc, count: 0 };
+    const newMeal = { id: randomUUID(), name, desc, count: 0 };
     meals.push(newMeal);
     res.status(201).json(newMeal);
 }

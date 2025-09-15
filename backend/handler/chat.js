@@ -23,10 +23,8 @@ export const requestAI = async (req, res) => {
   }
 
   var formatPrompt = `สร้างเมนู${role}ที่ปรุงด้วยวิธี${style}และเป็นอาหารชาติ${cuisine}`
-  formatPrompt += "มา 10 เมนู โดยวัตถุดิบหลักต้องใช้วัตถุดิบต่อไปนี้เท่านั้น"
-  ingredients.forEach((e, id) => {
-    formatPrompt += `${id+1}. ${e}\n`
-  });
+  formatPrompt += "มา 5 เมนู โดยวัตถุดิบหลักต้องใช้วัตถุดิบต่อไปนี้เท่านั้น"
+  formatPrompt += ingredients
   formatPrompt += "\n strictly follow these rule: 1. response should be the JSON array of menus 2. respond in Thai language  3. no other suggestion or code closure (```). just JSON objects text"
   formatPrompt += `\n 4. Example of a menu json structure { "name":"ชื่อเมนู", "desc":"รายละเอียดเมนู", "ingredientsUsed": ["วัตถุดิบที่ 1", "วัตถุดิบที่ 2", "วัตถุดิบที่ 3", ...]}`
 

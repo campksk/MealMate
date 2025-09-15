@@ -148,6 +148,16 @@ main {
   font-weight: bold;
 }
 
+.delete-text {
+  color: gray;
+  cursor: pointer;
+}
+
+.delete-text:hover {
+  color: red;
+  text-decoration: underline;
+}
+
 /* Responsive layout for small screens */
 @media (max-width: 600px) {
   main {
@@ -219,3 +229,4 @@ main {
     flex: 1;
   }
 }
+
