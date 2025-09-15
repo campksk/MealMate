@@ -198,10 +198,12 @@ likeBtn.addEventListener("click", async () => {
 
     const existing = favorites.find(m => m.name === updatedMeal.name);
     if (existing) {
-      existing.count = updatedMeal.count;
-    } else {
-      favorites.push(updatedMeal);
-    }
+  existing.count = updatedMeal.count;
+  } else {
+    // ถ้า backend ยังไม่ส่ง count มา ให้เริ่มที่ 1
+    updatedMeal.count = updatedMeal.count || 1;
+    favorites.push(updatedMeal);
+  }
 
     renderFavorites();
   }
