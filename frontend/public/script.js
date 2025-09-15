@@ -19,14 +19,26 @@ const filterRole = document.getElementById("filter-role");
 const filterStyle = document.getElementById("filter-style");
 const filterCuisine = document.getElementById("filter-cuisine");
 
+function showLoading() {
+  document.getElementById("loading").style.display = "flex";
+}
+
+function hideLoading() {
+  document.getElementById("loading").style.display = "none";
+}
+
 // Load initial global favorites from backend
 async function loadFavorites() {
+  showLoading();
   try {
     const res = await fetch(`${API_URL}/meals`);
     favorites = await res.json();
     renderFavorites();
   } catch (err) {
     console.error("Error loading favorites:", err);
+  }
+  finally{
+    hideLoading();
   }
 }
 
@@ -50,6 +62,7 @@ function showNextMeal() {
 
 // Fetch meal suggestions from backend
 async function fetchMealsFromAPI(ingredients, filters = {}) {
+  showLoading();
   try {
     const res = await fetch(`${API_URL}/generate`, {
       method: "POST",
@@ -61,10 +74,14 @@ async function fetchMealsFromAPI(ingredients, filters = {}) {
     console.error("Error fetching meals:", err);
     return [];
   }
+  finally{
+    hideLoading();
+  }
 }
 
 // Favorite a meal globally
 async function favoriteMeal(meal) {
+  showLoading();
   try {
     const res = await fetch(`${API_URL}/meals`, {
       method: "POST",
@@ -75,6 +92,9 @@ async function favoriteMeal(meal) {
   } catch (err) {
     console.error("Error favoriting meal:", err);
     return meal; // fallback
+  }
+  finally{
+    hideLoading();
   }
 }
 
