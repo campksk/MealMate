@@ -81,7 +81,6 @@ async function fetchMealsFromAPI(ingredients, filters = {}) {
 
 // Favorite a meal globally
 async function favoriteMeal(meal) {
-  showLoading();
   try {
     const res = await fetch(`${API_URL}/meals`, {
       method: "POST",
