@@ -17,16 +17,12 @@ let lastSent = [];
 
 export const requestAI = async (req, res) => {
     //const {ingredient, style, role, cuisine} = req.body;
-  const {ingredients, style = "ใดก็ได้", role = "", cuisine = "ไหนก็ได้"} = req.body;
+  const {ingredients, style = "any style", role = "anything", cuisine = "any"} = req.body;
   if (!ingredients) {
     return res.status(400).json({ error: "missing message" });
   }
 
-  var formatPrompt = `สร้างเมนู${role}ที่ปรุงด้วยวิธี${style}และเป็นอาหารชาติ${cuisine}`
-  formatPrompt += "มา 5 เมนู โดยวัตถุดิบหลักต้องใช้วัตถุดิบต่อไปนี้เท่านั้น"
-  formatPrompt += ingredients
-  formatPrompt += "\n strictly follow these rule: 1. response should be the JSON array of menus 2. respond in Thai language  3. no other suggestion or code closure (```). just JSON objects text"
-  formatPrompt += `\n 4. Example of a menu json structure { "name":"ชื่อเมนู", "desc":"รายละเอียดเมนู", "ingredientsUsed": ["วัตถุดิบที่ 1", "วัตถุดิบที่ 2", "วัตถุดิบที่ 3", ...]}`
+  var formatPrompt = `Create 5 menus of ${role}, cook by ${style}, and be a ${cuisine} cuisine. The menu shall only use ${ingredients}. Other subtle additive is allowed. Each menu should have a name and short description (2-3 sentence). And they are formatted into the JSON. Example of single menu json {"name" : "<menu name>", "desc":"<description>"}. All the menus should be in an array. No need to provide message other than JSON of menus. Each menu content should be written in Thai language. The most important. Do not provide text in markdown format. If the menu can't be create. Return [{"menu":"ไม่สามารถสร้างเมนูตามคำขอได้","desc":""}]`
 
   const ai = "google";
   const userIP = req.ip;
