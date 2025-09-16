@@ -19,9 +19,7 @@ Clone [MealMate](https://github.com/user/repo/blob/branch/other_file.md) with gi
 Copy or Rename `.env.example` to `.env` and fill out the values:
 
 ```.env
-TOKEN=REPLACE_HERE
-OWNER_ID=REPLACE_HERE
-EMBED_COLOR=#000001
+
 ``` 
 ## Run Frontend and Backend
 Linux/MacOS
