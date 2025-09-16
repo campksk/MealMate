@@ -12,7 +12,7 @@ export const addMeals = async (req, res) => {
         return res.status(400).json({ message: "Name and description are required" });
     }
 
-    const newMeal = { id: randomUUID(), name, desc, count: 0 };
+    const newMeal = { id: randomUUID(), name, desc, count: 1 };
     meals.push(newMeal);
     res.status(201).json(newMeal);
 }
