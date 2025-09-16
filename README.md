@@ -7,7 +7,7 @@ The problem arises from a common situation in daily life: “What should I eat t
 The importance of this project is to serve as a cooking companion that helps create new dishes, provides convenience in daily life, and also contributes to reducing factors that lead to global warming.
 ## Installation
 
-Clone [MealMate](https://github.com/user/repo/blob/branch/other_file.md) with git
+Clone [MealMate](https://github.com/campksk/MealMate.git) with git
 
 ```bash
   git clone https://github.com/campksk/MealMate.git
