@@ -62,7 +62,6 @@ function showNextMeal() {
 
 // Fetch meal suggestions from backend
 async function fetchMealsFromAPI(ingredients, filters = {}) {
-  showLoading();
   try {
     const res = await fetch(`${API_URL}/generate`, {
       method: "POST",
@@ -81,6 +80,7 @@ async function fetchMealsFromAPI(ingredients, filters = {}) {
 
 // Favorite a meal globally
 async function favoriteMeal(meal) {
+  showLoading();
   try {
     const res = await fetch(`${API_URL}/meals`, {
       method: "POST",
