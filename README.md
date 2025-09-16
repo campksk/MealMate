@@ -13,14 +13,7 @@ Clone [MealMate](https://github.com/campksk/MealMate.git) with git
   git clone https://github.com/campksk/MealMate.git
   cd MealMate
 ```
-    
-## Configuration
 
-Copy or Rename `.env.example` to `.env` and fill out the values:
-
-```.env
-
-``` 
 ## Run Frontend and Backend
 Linux/MacOS
 ```bash
