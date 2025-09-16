@@ -20,11 +20,11 @@ const filterStyle = document.getElementById("filter-style");
 const filterCuisine = document.getElementById("filter-cuisine");
 
 function showLoading() {
-  document.getElementById("loading").style.display = "flex";
+  document.getElementById("loading-overlay").classList.add("active");
 }
 
 function hideLoading() {
-  document.getElementById("loading").style.display = "none";
+  document.getElementById("loading-overlay").classList.remove("active");
 }
 
 // Load initial global favorites from backend
@@ -180,7 +180,7 @@ form.addEventListener("submit", async (e) => {
   };
 
   // 🔹 Show overlay
-  document.getElementById("loading-overlay").classList.add("active");
+  showLoading();
 
   meals = [];
   showNextMeal();
@@ -189,7 +189,7 @@ form.addEventListener("submit", async (e) => {
   meals = await fetchMealsFromAPI(ingredients, filters);
 
   // 🔹 Hide overlay
-  document.getElementById("loading-overlay").classList.remove("active");
+  hideLoading();
 
   input.value = "";
   showNextMeal();
