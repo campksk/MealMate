@@ -70,9 +70,9 @@ export const requestAI = async (req, res) => {
         contents: formatPrompt,
       });
 
-      console.log(response.text);
       content = response.text;
       content.replace(/`/g, '').replace("json", '')
+      console.log(content);
     }
 
     return res.json(JSON.parse(content));
