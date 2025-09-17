@@ -71,10 +71,12 @@ export const requestAI = async (req, res) => {
       });
 
       content = response.text;
-      content.replace(/`/g, '').replace("json", '')
-      console.log(content);
     }
 
+    content.replace(/```json/g, "")
+           .replace(/```/g, "")
+           .trim()
+    console.log(content);
     return res.json(JSON.parse(content));
 
   } catch (err) {
