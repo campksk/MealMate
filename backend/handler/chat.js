@@ -72,7 +72,7 @@ export const requestAI = async (req, res) => {
 
       console.log(response.text);
       content = response.text;
-      content.replace(/`/g, '')
+      content.replace(/`/g, '').replace("json", '')
     }
 
     return res.json(JSON.parse(content));
